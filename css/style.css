@@ -1,0 +1,41 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.error {
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    top: 35%;
+    margin-left: -150px;
+    box-sizing: border-box;
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 0 8px #ddd;
+    display: none;
+}
+
+ol {
+    list-style-type: none;
+    text-align: center;
+}
+
+ol li {
+    border: 15px solid #fff;
+    box-shadow: 0 0 8px #ddd;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+ol li:hover {
+    border-color: #fffafa;
+    opacity: 1;
+}
