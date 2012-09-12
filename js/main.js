@@ -15,7 +15,13 @@
             baseURL: 'http://m.nok.it/?app_id={ID}&token={TOKEN}&c={LAT},{LON}&nord&nodot&t=1&h=200&w=200'
         },
         overlay = doc.querySelector('.overlay'),
-        correct;
+        answers = {},
+        text = {
+            correct: 'Well done, that is indeed your location!',
+            wrong: 'Nope! Unfortunately you picked the wrong one. ' +
+                   'That one is ${CITY}, and you can learn more about it ' +
+                   '<a href="http://en.wikipedia.com/wiki/${W_CITY}" target="_blank">on Wikipedia</a>.'
+        };
 
     init = function(){
         //app lives here
@@ -41,19 +47,24 @@
         req = new XMLHttpRequest();
         req.open('GET', 'data/cities.json', true);
         req.onreadystatechange = function (aEvt) {
-            var city, el;
+            var city, rurl, el;
             if (req.readyState == 4) {
                 if(req.status == 200) {
                     cities = JSON.parse(req.responseText);
                     cities.shuffle();
                     city = cities.randomElement();
-                    console.log(city);
-                    img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
+                    //console.log(city);
+                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon);
+                    img.push(rurl);
+                    answers[rurl] = city;
                     cities.shuffle();
                     city = cities.randomElement();
-                    console.log(city);
-                    img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
-                    correct = img[0];
+                    //console.log(city);
+                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon);
+                    img.push(rurl);
+                    answers[rurl] = city;
+
+                    answers.correct = img[0];
                     img.shuffle();
                     img.forEach(function(image, index){
                         el = doc.createElement('img');
@@ -98,11 +109,24 @@
         });
         Array.prototype.forEach.call(doc.querySelectorAll('ol li'), function(li){
             li.addEventListener('click', function(e) {
-                if (this.querySelector('img').src === correct) {
+                var src = this.querySelector('img').src,
+                    result = document.querySelector('.result');
+                Array.prototype.forEach.call(this.parentNode.children, function(l){
+                    l.classList.remove('correct');
+                    l.classList.remove('wrong');
+                });
+                if (src === answers.correct) {
                     this.classList.add('correct');
+                    result.classList.remove('wrong');
+                    result.classList.add('correct');
+                    result.innerHTML = text.correct;
                 }
                 else {
                     this.classList.add('wrong');
+                    result.classList.remove('correct');
+                    result.classList.add('wrong');
+                    result.innerHTML = text.wrong.replace('${CITY}', answers[src].city)
+                                               .replace('${W_CITY}', answers[src].wikipedia);
                 }
             });
         });

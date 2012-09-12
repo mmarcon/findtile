@@ -10,7 +10,7 @@ body {
 header {
     background-color: #222;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 1.2;
 }
 
@@ -65,7 +65,7 @@ ol li {
     width: 200px;
     height: 200px;
     display: inline-block;
-    margin: 20px;
+    margin: 5px 20px;
     cursor: pointer;
     opacity: 0.9;
     position: relative;
@@ -84,8 +84,8 @@ ol li.wrong img {
 
 ol li.correct,
 ol li.correct:hover {
-    border-color: #32cd32;
-    background-color: #32cd32;
+    border-color: #228b22;
+    background-color: #228b22;
 }
 
 ol li:hover {
@@ -113,6 +113,22 @@ ol img {
     line-height: 1.4;
     margin-bottom: 14px;
     color: #666;
+}
+
+.result {
+    width: 780px;
+    line-height: 1.2;
+    font-size: 18px;
+    color: #666;
+    margin: 5px auto;
+}
+
+.wrong {
+    color: #b22222;
+}
+
+.correct {
+    color: #228b22;
 }
 
 .overlay {
