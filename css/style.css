@@ -72,6 +72,22 @@ ol li {
     /*display: none;*/
 }
 
+ol li.wrong,
+ol li.wrong:hover {
+    border-color: #b22222;
+    background-color: #b22222;
+}
+
+ol li.wrong img {
+    opacity: 0.5;
+}
+
+ol li.correct,
+ol li.correct:hover {
+    border-color: #32cd32;
+    background-color: #32cd32;
+}
+
 ol li:hover {
     border-color: #fffafa;
     opacity: 1;
@@ -84,6 +100,7 @@ ol img {
     right: 0;
     bottom: 0;
     display: none;
+    z-index: 98;
 }
 
 .description {

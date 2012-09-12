@@ -14,7 +14,8 @@
             token: 'fjFdGyRjstwqr9iJxLwQ-g',
             baseURL: 'http://m.nok.it/?app_id={ID}&token={TOKEN}&c={LAT},{LON}&nord&nodot&t=1&h=200&w=200'
         },
-        overlay = doc.querySelector('.overlay');
+        overlay = doc.querySelector('.overlay'),
+        correct;
 
     init = function(){
         //app lives here
@@ -44,12 +45,15 @@
             if (req.readyState == 4) {
                 if(req.status == 200) {
                     cities = JSON.parse(req.responseText);
+                    cities.shuffle();
                     city = cities.randomElement();
-                    // console.log(city);
+                    console.log(city);
                     img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
+                    cities.shuffle();
                     city = cities.randomElement();
-                    // console.log(city);
+                    console.log(city);
                     img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
+                    correct = img[0];
                     img.shuffle();
                     img.forEach(function(image, index){
                         el = doc.createElement('img');
@@ -91,6 +95,16 @@
                 this.parentNode.style.display = 'none';
                 overlay.style.display = 'none';
             }, false);
+        });
+        Array.prototype.forEach.call(doc.querySelectorAll('ol li'), function(li){
+            li.addEventListener('click', function(e) {
+                if (this.querySelector('img').src === correct) {
+                    this.classList.add('correct');
+                }
+                else {
+                    this.classList.add('wrong');
+                }
+            });
         });
     };
 
