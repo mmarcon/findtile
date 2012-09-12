@@ -4,16 +4,21 @@
     Array.prototype.randomElement = Array.prototype.randomElement || function(){
         return this[Math.floor(Math.random()*this.length)];
     };
+    Array.prototype.shuffle = Array.prototype.shuffle || function(){
+        for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
+    };
 
-    var init, locationFound, locationNotFound, cities,
+    var init, locationFound, locationNotFound, cities, attachEventHandlers,
         API = {
             id: 'C2Cse_31xwvbccaAIAaP',
             token: 'fjFdGyRjstwqr9iJxLwQ-g',
             baseURL: 'http://m.nok.it/?app_id={ID}&token={TOKEN}&c={LAT},{LON}&nord&nodot&t=1&h=200&w=200'
-        };
+        },
+        overlay = doc.querySelector('.overlay');
 
     init = function(){
         //app lives here
+        attachEventHandlers();
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(locationFound, locationNotFound);
         }
@@ -40,24 +45,34 @@
                 if(req.status == 200) {
                     cities = JSON.parse(req.responseText);
                     city = cities.randomElement();
-                    console.log(city);
+                    // console.log(city);
                     img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
                     city = cities.randomElement();
-                    console.log(city);
+                    // console.log(city);
                     img.push(url.replace('{LAT}', city.lat).replace('{LON}', city.lon));
+                    img.shuffle();
                     img.forEach(function(image, index){
                         el = doc.createElement('img');
+                        el.width = 200;
+                        el.height = 200;
                         el.src = image;
                         el.onload = function(){
-                            this.parentNode.style.display = 'inline-block';
+                            this.style.display = 'block';
                         };
                         doc.querySelector('.tile' + (index + 1)).appendChild(el);
                     });
-                    // Array.prototype.forEach.call(doc.querySelectorAll('ol li'), function(e){
-                    //     e.style.display = 'inline-block';
-                    // });
+
+                    if (localStorage.getItem('findtile')) {
+                        overlay.style.display = 'block';
+                        doc.querySelector('.error.cheating').style.display = 'block';
+                    }
+                    else {
+                        //for cheaters
+                        localStorage.setItem('findtile', true);
+                    }
                 }
                 else {
+                    overlay.style.display = 'block';
                     doc.querySelector('.error.nodata').style.display = 'block';
                 }
             }
@@ -66,7 +81,17 @@
     };
 
     locationNotFound = function(){
+        overlay.style.display = 'block';
         doc.querySelector('.error.nolocation').style.display = 'block';
+    };
+
+    attachEventHandlers = function(){
+        Array.prototype.forEach.call(doc.querySelectorAll('.error span'), function(e){
+            e.addEventListener('click', function(){
+                this.parentNode.style.display = 'none';
+                overlay.style.display = 'none';
+            }, false);
+        });
     };
 
     if(doc.addEventListener) {

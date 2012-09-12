@@ -1,8 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Londrina+Outline|McLaren);
+
 body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'McLaren', cursive;
     font-weight: 100;
     font-size: 14px;
     background-color: #fff;
+}
+
+header {
+    background-color: #222;
+    padding: 10px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+h1 {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 158px;
+    text-align: center;
+    color: #ccc;
 }
 
 .error {
@@ -16,6 +32,26 @@ body {
     background: #fff;
     box-shadow: 0 0 8px #ddd;
     display: none;
+    z-index: 101;
+    min-height: 150px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.error span {
+    display: block;
+    position: absolute;
+    background: #222;
+    border: 2px solid #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 14px;
+    color: #fff;
+    top: -8px;
+    right: -8px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
 }
 
 ol {
@@ -32,10 +68,44 @@ ol li {
     margin: 20px;
     cursor: pointer;
     opacity: 0.9;
-    display: none;
+    position: relative;
+    /*display: none;*/
 }
 
 ol li:hover {
     border-color: #fffafa;
     opacity: 1;
+}
+
+ol img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.description {
+    width: 780px;
+    margin: 10px auto;
+    font-size: 24px;
+}
+
+.description p {
+    line-height: 1.4;
+    margin-bottom: 14px;
+    color: #666;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    opacity: 0.85;
+    display: none;
+    z-index: 100;
 }

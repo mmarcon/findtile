@@ -11,7 +11,17 @@
 </head>
 
 <body>
+    <header>
+        <h1>Find your tile</h1>
+    </header>
 
+    <section class="description">
+        <p>
+            How well do you know the area where you live? Would you be able to tell
+            which one of the map tiles below corresponds to your location?
+        </p>
+    </section>
+    
     <ol>
         <li class="tile tile1"></li>
         <li class="tile tile2"></li>
@@ -19,11 +29,18 @@
     </ol>
 
     <div class="error nolocation">
+        <span>x</span>
         <p>Location could not be determined or your browser does not support this feature.</p>
     </div>
     <div class="error nodata">
+        <span>x</span>
         <p>Error while retrieving data. Try again later.</p>
     </div>
+    <div class="error cheating">
+        <span>x</span>
+        <p>Reloading is cheating....</p>
+    </div>
+    <div class="overlay"></div>
 <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script-->
 <script type="text/javascript" src="js/main.js"></script>
 </body>
