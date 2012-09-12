@@ -31,8 +31,8 @@ ol li {
     display: inline-block;
     margin: 20px;
     cursor: pointer;
-    opacity: 0.5;
-    overflow: hidden;
+    opacity: 0.9;
+    display: none;
 }
 
 ol li:hover {
