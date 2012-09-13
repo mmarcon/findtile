@@ -73,18 +73,19 @@
                         el.src = image;
                         el.onload = function(){
                             this.style.display = 'block';
+                            this.parentNode.classList.add('back');
                         };
                         doc.querySelector('.tile' + (index + 1)).appendChild(el);
                     });
 
-                    if (localStorage.getItem('findtile')) {
-                        overlay.style.display = 'block';
-                        doc.querySelector('.error.cheating').style.display = 'block';
-                    }
-                    else {
-                        //for cheaters
-                        localStorage.setItem('findtile', true);
-                    }
+                    // if (localStorage.getItem('findtile')) {
+                    //     overlay.style.display = 'block';
+                    //     doc.querySelector('.error.cheating').style.display = 'block';
+                    // }
+                    // else {
+                    //     //for cheaters
+                    //     localStorage.setItem('findtile', true);
+                    // }
                 }
                 else {
                     overlay.style.display = 'block';

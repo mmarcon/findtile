@@ -86,6 +86,7 @@ a:hover {
 ol {
     list-style-type: none;
     text-align: center;
+    perspective: 1000px;
 }
 
 ol li {
@@ -98,7 +99,39 @@ ol li {
     cursor: pointer;
     opacity: 0.9;
     position: relative;
-    /*display: none;*/
+    z-index: 95;
+    
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    -webkit-transition: all 1.0s ease;
+    -moz-transition: all 1.0s ease;
+    -ms-transition: all 1.0s ease;
+    transition: all 1.0s ease;
+    
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transform-origin: 30%;
+    -moz-transform-origin: 30%;
+    -ms-transform-origin: 30%;
+    transform-origin: 30%;
+}
+
+ol li.back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
 ol li.wrong,
