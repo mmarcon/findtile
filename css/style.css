@@ -12,6 +12,8 @@ header {
     padding: 10px;
     margin-bottom: 10px;
     line-height: 1.2;
+    overflow: visible;
+    position: relative;
 }
 
 h1 {
@@ -19,6 +21,28 @@ h1 {
     font-size: 158px;
     text-align: center;
     color: #ccc;
+}
+
+h2 {
+    position: absolute;
+    right: 5px;
+    bottom: -25px;
+    background-color: #222;
+    color: #fff;
+    line-height: 1.5;
+    padding: 5px;
+    font-size: 12px;
+}
+
+a:link,
+a:visited,
+a:active {
+    text-decoration: none;
+    color: #4169e1;
+}
+
+a:hover {
+    color: #6495ED;
 }
 
 .error {
