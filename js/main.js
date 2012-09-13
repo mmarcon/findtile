@@ -1,3 +1,19 @@
+/*
+ * Copyright 2012 Massimiliano Marcon (http://marcon.me)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
 (function(doc){
     'use strict';
 
@@ -12,7 +28,7 @@
         API = {
             id: 'C2Cse_31xwvbccaAIAaP',
             token: 'fjFdGyRjstwqr9iJxLwQ-g',
-            baseURL: 'http://m.nok.it/?app_id={ID}&token={TOKEN}&c={LAT},{LON}&nord&nodot&t=1&h=200&w=200'
+            baseURL: 'http://m.nok.it/?app_id={ID}&token={TOKEN}&c={LAT},{LON}&nord&nodot&t=1&h=200&w=200&z={ZOOM}'
         },
         overlay = doc.querySelector('.overlay'),
         answers = {},
@@ -39,10 +55,10 @@
             lon = position.coords.longitude,
             img = [],
             url = API.baseURL.replace('{ID}', API.id).replace('{TOKEN}', API.token),
-            req;
+            req, zoom = Math.max(9, Math.floor(Math.random() * 14));
 
         //Get map tiles
-        img.push(url.replace('{LAT}', lat).replace('{LON}', lon));
+        img.push(url.replace('{LAT}', lat).replace('{LON}', lon).replace('{ZOOM}', zoom));
 
         req = new XMLHttpRequest();
         req.open('GET', 'data/cities.json', true);
@@ -54,13 +70,13 @@
                     cities.shuffle();
                     city = cities.randomElement();
                     //console.log(city);
-                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon);
+                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon).replace('{ZOOM}', zoom);
                     img.push(rurl);
                     answers[rurl] = city;
                     cities.shuffle();
                     city = cities.randomElement();
                     //console.log(city);
-                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon);
+                    rurl = url.replace('{LAT}', city.lat).replace('{LON}', city.lon).replace('{ZOOM}', zoom);
                     img.push(rurl);
                     answers[rurl] = city;
 
