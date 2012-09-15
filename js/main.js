@@ -120,17 +120,17 @@
     };
 
     attachEventHandlers = function(){
-        Array.prototype.forEach.call(doc.querySelectorAll('.error span'), function(e){
+        [].forEach.call(doc.querySelectorAll('.error span'), function(e){
             e.addEventListener('click', function(){
                 this.parentNode.style.display = 'none';
                 overlay.style.display = 'none';
             }, false);
         });
-        Array.prototype.forEach.call(doc.querySelectorAll('ol li'), function(li){
+        [].forEach.call(doc.querySelectorAll('ol li'), function(li){
             li.addEventListener('click', function(e) {
                 var src = this.querySelector('img').src,
                     result = document.querySelector('.result');
-                Array.prototype.forEach.call(this.parentNode.children, function(l){
+                [].forEach.call(this.parentNode.children, function(l){
                     l.classList.remove('correct');
                     l.classList.remove('wrong');
                 });
